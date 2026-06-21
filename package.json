@@ -1,0 +1,12 @@
+{
+  "name": "used-marketplace",
+  "version": "1.0.0",
+  "description": "중고거래 서비스 MVP",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
