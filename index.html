@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>중고마켓</title>
@@ -13,23 +13,20 @@
       background: #ff6f0f;
       color: white;
       padding: 15px;
-      font-size: 20px;
+      font-size: 24px;
+      text-align: center;
     }
     .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
       padding: 20px;
     }
     .item {
       background: white;
-      margin-bottom: 15px;
       padding: 15px;
       border-radius: 10px;
-      display: flex;
-    }
-    .item img {
-      width: 120px;
-      height: 120px;
-      border-radius: 10px;
-      margin-right: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .price {
       color: #ff6f0f;
@@ -37,30 +34,29 @@
     }
   </style>
 </head>
+
 <body>
 
-<header>🧡 중고마켓</header>
+<header>🛒 중고마켓</header>
 
 <div class="container">
-
   <div class="item">
-    <img src="https://via.placeholder.com/120">
-    <div>
-      <h3>아이폰 13 판매</h3>
-      <p class="price">500,000원</p>
-      <p>서울 직거래 가능</p>
-    </div>
+    <h3>아이폰 13</h3>
+    <p class="price">500,000원</p>
+    <p>상태 좋아요</p>
   </div>
 
   <div class="item">
-    <img src="https://via.placeholder.com/120">
-    <div>
-      <h3>노트북 판매</h3>
-      <p class="price">300,000원</p>
-      <p>상태 좋음</p>
-    </div>
+    <h3>노트북</h3>
+    <p class="price">700,000원</p>
+    <p>거의 새상품</p>
   </div>
 
+  <div class="item">
+    <h3>자전거</h3>
+    <p class="price">150,000원</p>
+    <p>사용감 있음</p>
+  </div>
 </div>
 
 </body>
