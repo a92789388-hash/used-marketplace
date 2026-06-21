@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>중고마켓</title>
@@ -9,55 +9,132 @@
       margin: 0;
       background: #f5f5f5;
     }
+
     header {
       background: #ff6f0f;
       color: white;
       padding: 15px;
-      font-size: 24px;
       text-align: center;
+      font-size: 20px;
     }
+
     .container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
       padding: 20px;
+      max-width: 800px;
+      margin: auto;
     }
+
+    input, button {
+      padding: 10px;
+      margin: 5px;
+    }
+
     .item {
       background: white;
       padding: 15px;
+      margin-top: 10px;
       border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    .price {
-      color: #ff6f0f;
-      font-weight: bold;
+
+    .btn {
+      margin-right: 5px;
+      cursor: pointer;
     }
   </style>
 </head>
-
 <body>
 
 <header>🛒 중고마켓</header>
 
 <div class="container">
-  <div class="item">
-    <h3>아이폰 13</h3>
-    <p class="price">500,000원</p>
-    <p>상태 좋아요</p>
-  </div>
 
-  <div class="item">
-    <h3>노트북</h3>
-    <p class="price">700,000원</p>
-    <p>거의 새상품</p>
-  </div>
+  <!-- 검색 -->
+  <input type="text" id="search" placeholder="검색어 입력" onkeyup="searchItem()">
 
-  <div class="item">
-    <h3>자전거</h3>
-    <p class="price">150,000원</p>
-    <p>사용감 있음</p>
-  </div>
+  <hr>
+
+  <!-- 상품 등록 -->
+  <h3>상품 등록</h3>
+  <input type="text" id="title" placeholder="상품명">
+  <input type="number" id="price" placeholder="가격">
+  <button onclick="addItem()">등록</button>
+
+  <hr>
+
+  <!-- 상품 리스트 -->
+  <h3>상품 목록</h3>
+  <div id="list"></div>
+
 </div>
+
+<script>
+  let items = [
+    { title: "아이폰 13", price: 700000, liked: false },
+    { title: "맥북 에어", price: 900000, liked: false }
+  ];
+
+  function render(data = items) {
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+
+    data.forEach((item, index) => {
+      list.innerHTML += `
+        <div class="item">
+          <b>${item.title}</b><br>
+          ${item.price}원<br><br>
+
+          <button class="btn" onclick="likeItem(${index})">
+            ${item.liked ? "❤️ 찜됨" : "🤍 찜하기"}
+          </button>
+
+          <button class="btn" onclick="deleteItem(${index})">
+            🗑 삭제
+          </button>
+        </div>
+      `;
+    });
+  }
+
+  function addItem() {
+    const title = document.getElementById("title").value;
+    const price = document.getElementById("price").value;
+
+    if (!title || !price) {
+      alert("입력하세요!");
+      return;
+    }
+
+    items.push({
+      title,
+      price,
+      liked: false
+    });
+
+    render();
+  }
+
+  function deleteItem(index) {
+    items.splice(index, 1);
+    render();
+  }
+
+  function likeItem(index) {
+    items[index].liked = !items[index].liked;
+    render();
+  }
+
+  function searchItem() {
+    const keyword = document.getElementById("search").value.toLowerCase();
+
+    const filtered = items.filter(item =>
+      item.title.toLowerCase().includes(keyword)
+    );
+
+    render(filtered);
+  }
+
+  render();
+</script>
 
 </body>
 </html>
